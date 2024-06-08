@@ -9,7 +9,7 @@
                 <field name="name" string= "Pateint Name"/>
                 <field name="age"  string= "Pateint Age"/>
                 <field name="gender" string= "Pateint Gender"/>
-                 <field name="ref"  />
+                <field name="ref"  />
             </tree>
         </field>
     </record>
@@ -60,6 +60,7 @@
                          <group>
                             <field name="address" />
                             <field name="active" invisible="1"/>
+                            <field name="appointment_id" />
                         </group>
                                 
                     </group>

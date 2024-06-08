@@ -13,6 +13,9 @@ class Pateint(models.Model):
         ('female', 'Female')
     ], string='Gender',default="female")
 
+    appointment_id = fields.Many2one("om_hospital.appointment",string="Appointment")
+    
+
     
     active = fields.Boolean(string='Active',default=True) # use to archeive and unarcheive
 
