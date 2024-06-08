@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="view_om_hospital_pateint_tree" model="ir.ui.view">
+        <field name="name">om_hospital.pateint.tree</field>
+        <field name="model">om_hospital.pateint</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string= "Pateint Name"/>
+                <field name="age"  string= "Pateint Age"/>
+                <field name="gender" string= "Pateint Gender"/>
+                 <field name="ref"  />
+            </tree>
+        </field>
+    </record>
+   
+   <record id="view_om_hospital_pateint_search" model="ir.ui.view">
+        <field name="name">om_hospital.pateint.search</field>
+        <field name="model">om_hospital.pateint</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string= "Pateint Name" filter_domain="['|', ('name', 'ilike', self), ('ref', 'ilike', self)]"/>
+                <field name="age"  string= "Pateint Age"/>
+                <field name="gender" string= "Pateint Gender"/>
+                <field name="ref" />
+                <filter name="filter_male" string="Male" domain="[('gender','=','male')]"/>
+                <filter name="filter_female" string="Female" domain="[('gender','=','female')]"/>
+                <filter name="filter_active" string="Archieve" domain="[('active','=', False)]"/>
+
+                <separator/>
+                <!-- <filter name="filter_age" string="Kids" domain="[('age','&lt;=',5)]"/> -->
+
+                <group expand="0" string="Group By">
+                    <filter name="group_by_gender" string="Gender"  context="{'group_by': 'gender'}"/>
+                </group>
+                <searchpanel>
+                     <field name="gender" string="Gender" select="multi" icon="fa-users" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+   
+
+   <record id="view_om_hospital_pateint_form" model="ir.ui.view">
+        <field name="name">om_hospital.pateint.form</field>
+        <field name="model">om_hospital.pateint</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="date_of_birth" />
+                            <field name="age" />
+                        </group>
+                        <group>
+                            <field name="gender" />
+                            <field name="ref" />
+                        </group>
+                         <group>
+                            <field name="address" />
+                            <field name="active" invisible="1"/>
+                        </group>
+                                
+                    </group>
+                </sheet>
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Patient</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">om_hospital.pateint</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_group_by_gender":1,"search_default_filter_male":1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Create a new Patient Record
+            </p>
+        </field>
+    </record>
+
+    <menuitem 
+    id="menu_patient" 
+    name="Patient" 
+    action="action_hospital_patient"
+    parent="menu_patient_master" 
+    sequence="0" />
+
+  
+
+
+</odoo>

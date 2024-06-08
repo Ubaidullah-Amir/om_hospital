@@ -1,0 +1,1 @@
+this is a odoo module for testing and learning purpose .
