@@ -5,7 +5,7 @@
         <field name="name">om_hospital.appointment.tree</field>
         <field name="model">om_hospital.appointment</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree create="0" delete="0">
                 <field name="pateint_id" />
                 <field name="appointment_time" />
                 <field name="booking_Date" />
@@ -28,17 +28,38 @@
         <field name="name">om_hospital.appointment.form</field>
         <field name="model">om_hospital.appointment</field>
         <field name="arch" type="xml">
-            <form>
+            <form create="0" delete="0">
+            <header>
+                <field name="state" widget="statusbar" options="{'clickable':'1'}"
+                statusbar_visible="draft,in_consultation,done"
+                />
+            </header>
+
                 <sheet>
+                    <div>
+                        <h2>
+                            <field name="priority" widget="priority"/>
+                        </h2>
+                    </div>
+                    
                     <group>
                         <group>
                             <field name="pateint_id" />
                             <field name="ref" />
-                            <field name="booking_Date" />
+                            <field name="booking_Date" help="Date of booking"/>
                             <field name="gender" />
                         </group>
                         <group>
                             <field name="appointment_time" />
+                            <!-- executes python code must be defined in the same model -->
+                            <button type="object" name="method_name" string="Object button" class="oe_highlight"
+                            help="runs an effect defined in the appoinment.method_name"
+                            confirm="Are you sure to execute python code ?"/> 
+                            <!-- executes python code must be defined in the same model -->
+                            <button type="action" name="%(om_hospital.action_hospital_female_patient)d"
+                            help="redirect to female patient page"
+                            confirm="Are you sure to open patient action ?"
+                            class="oe_highlight" string="Action button"/> 
                              
                         </group>
                         <group>
@@ -49,9 +70,7 @@
                     </group>
                     <notebook>
                         <page name="perscription" string="Perscription">
-                            <group >
-                                <field name="gender" />
-                            </group>
+                            <field name="prescription" placeholder="Enter your prescription"/>
                             
                         </page>
                         <page name="pharmacy" string="Pharmacy">

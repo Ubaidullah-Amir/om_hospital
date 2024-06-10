@@ -5,6 +5,7 @@
     'summary': 'Module used for management of treating patient',
     'author': 'Odolution',
     'license': 'LGPL-3',
+    'sequence': '-100',
     'depends': ["mail"],
     'demo': [],
     'data': [
