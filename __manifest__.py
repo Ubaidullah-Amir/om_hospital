@@ -13,7 +13,11 @@
         "views/menu.xml",
         "views/pateint_view.xml",
         "views/female_pateint_view.xml",
-        "views/appointment_view.xml"
+        "views/appointment_view.xml",
+        "views/doctor_view.xml",
+        "report/patient_card.xml",
+        "report/patient_details_template.xml",
+        "report/report.xml"
         ],
     'images': ['images/1.PNG', 'images/2.PNG', 'images/3.PNG','images/4.PNG','static/description/icon.png'],
     'installable': True,

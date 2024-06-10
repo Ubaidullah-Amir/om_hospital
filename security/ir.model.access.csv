@@ -4,3 +4,6 @@ access.om_hospital.pateint,access_om_hospital_pateint,om_hospital.model_om_hospi
 
 
 access.om_hospital.appointment,access_om_hospital_appointment,om_hospital.model_om_hospital_appointment,base.group_user,1,1,1,1
+
+
+access.om_hospital.doctor,access_om_hospital_doctor,om_hospital.model_om_hospital_doctor,base.group_user,1,1,1,1

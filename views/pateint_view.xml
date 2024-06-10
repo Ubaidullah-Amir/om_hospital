@@ -13,6 +13,48 @@
             </tree>
         </field>
     </record>
+
+    <record id="view_om_hospital_pateint_kanban" model="ir.ui.view">
+            <field name="name">om_hospital.pateint.kanban</field>
+            <field name="model">om_hospital.pateint</field>
+            <field name="arch" type="xml">
+                <kanban >
+                    <field name="name"/>
+                    <field name="ref"/>
+                    <field name="address"/>
+                    <field name="gender"/>
+                    <!-- <field name="appointment_id"/> -->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                               
+                                <div class="oe_kanban_details">
+                                    <ul>
+                                        <li>
+                                            <field name="name"/>
+                                        </li>
+                                        <li>
+                                            <field name="ref"/>
+                                        </li>
+                                        <li>
+                                            <field name="gender"/>
+                                        </li>
+                                        <!-- <li>
+                                            <field name="appointment_id"/>
+                                        </li> -->
+                                        <li>
+                                            <field name="address"/>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
    
    <record id="view_om_hospital_pateint_search" model="ir.ui.view">
         <field name="name">om_hospital.pateint.search</field>
@@ -46,7 +88,9 @@
         <field name="model">om_hospital.pateint</field>
         <field name="arch" type="xml">
             <form>
+                
                 <sheet>
+                <field name="image" widget="image" class="oe_avatar"/>
                     <group>
                         <group>
                             <field name="name" />
@@ -60,10 +104,18 @@
                          <group>
                             <field name="address" />
                             <field name="active" invisible="1"/>
-                            <field name="appointment_id" />
                         </group>
                                 
                     </group>
+                    <notebook>
+                        
+                        <page name="appointments" string="Appointments">
+                            <group >
+                                <field name="appointment_ids" />
+                            </group>
+                            
+                        </page>
+                    </notebook>
                 </sheet>
                 <!-- Chatter -->
                 <div class="oe_chatter">
@@ -79,7 +131,7 @@
         <field name="name">Patient</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">om_hospital.pateint</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
         <field name="context">{"search_default_group_by_gender":1,"search_default_filter_male":1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

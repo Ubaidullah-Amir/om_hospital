@@ -12,9 +12,9 @@ class Pateint(models.Model):
         ('male', 'Male'),
         ('female', 'Female')
     ], string='Gender',default="female")
+    image = fields.Binary(string= "Patient Image")
+    appointment_ids = fields.One2many("om_hospital.appointment", "pateint_id", string="Appointment")
 
-    appointment_id = fields.Many2one("om_hospital.appointment",string="Appointment")
-    
 
     
     active = fields.Boolean(string='Active',default=True) # use to archeive and unarcheive
