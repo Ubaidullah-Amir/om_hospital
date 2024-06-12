@@ -29,3 +29,6 @@ class Pateint(models.Model):
                 rec.age = today.year - rec.date_of_birth.year
             else:
                 rec.age
+    @api.model
+    def test_cron_job(self):
+        print("hello")

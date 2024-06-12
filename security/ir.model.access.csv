@@ -7,3 +7,6 @@ access.om_hospital.appointment,access_om_hospital_appointment,om_hospital.model_
 
 
 access.om_hospital.doctor,access_om_hospital_doctor,om_hospital.model_om_hospital_doctor,base.group_user,1,1,1,1
+
+
+access.om_hospital.patient.report.wizard,access_om_hospital_patient_report_wizard,om_hospital.model_om_hospital_patient_report_wizard,base.group_user,1,1,1,1

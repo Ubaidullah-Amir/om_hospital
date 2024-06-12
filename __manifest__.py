@@ -6,10 +6,14 @@
     'author': 'Odolution',
     'license': 'LGPL-3',
     'sequence': '-100',
-    'depends': ["mail"],
+    'depends': ["mail",
+                "report_xlsx"
+                ],
     'demo': [],
     'data': [
         "security/ir.model.access.csv",
+        "data/cron.xml",
+        "wizard/patient_report_view.xml",
         "views/menu.xml",
         "views/pateint_view.xml",
         "views/female_pateint_view.xml",
