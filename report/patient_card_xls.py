@@ -11,8 +11,8 @@ class PatientDetailsXlsx(models.AbstractModel):
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, wizard):
-        # Get all patient records
-        patients = self.env['om_hospital.pateint'].search([])
+        # Get the patient data from the passed data dictionary
+        patient_data = data.get('patients', [])
 
         # Add a sheet
         sheet = workbook.add_worksheet('Patient Details')
@@ -27,13 +27,11 @@ class PatientDetailsXlsx(models.AbstractModel):
 
         # Write data rows
         row = 1
-        for patient in patients:
-            sheet.write(row, 0, patient.name)
-            sheet.write(row, 1, patient.gender)
-            sheet.write(row, 2, patient.age)
-            sheet.write(row, 3, patient.ref)
-            sheet.write(row, 4, patient.address)
-            sheet.write(row, 5, str(patient.date_of_birth))
+        for patient in patient_data:
+            sheet.write(row, 0, patient['name'])
+            sheet.write(row, 1, patient['gender'])
+            sheet.write(row, 2, patient['age'])
+            sheet.write(row, 3, patient['ref'])
+            sheet.write(row, 4, patient['address'])
+            sheet.write(row, 5, patient['date_of_birth'])
             row += 1
-
-
