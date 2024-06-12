@@ -18,6 +18,27 @@
     parent="menu_hospital_root" 
     sequence="0" />
 
+    <menuitem 
+    id="menu_doctor_master" 
+    name="Doctor" 
+    parent="menu_hospital_root" 
+    sequence="0" />
+
+    <menuitem 
+    id="menu_reporting_master" 
+    name="Reporting" 
+    parent="menu_hospital_root" 
+    sequence="0" />
+
+     <menuitem 
+    id="menu_reporting_patient" 
+    name="Patient" 
+    action="action_hospital_patient_report"
+    parent="menu_reporting_master" 
+    sequence="0" />
+
+   
+    
     
 
    
