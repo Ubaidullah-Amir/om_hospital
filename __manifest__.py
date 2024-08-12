@@ -13,12 +13,16 @@
     'data': [
         "security/ir.model.access.csv",
         "data/cron.xml",
+        "data/data.xml",
+        "data/om_hospital.department.csv",
         "wizard/patient_report_view.xml",
+        "wizard/appointment_delete_wizard.xml",
         "views/menu.xml",
         "views/pateint_view.xml",
         "views/female_pateint_view.xml",
         "views/appointment_view.xml",
         "views/doctor_view.xml",
+        "views/department_view.xml",
         "report/patient_card.xml",
         "report/patient_details_template.xml",
         "report/report.xml"

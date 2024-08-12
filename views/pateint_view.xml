@@ -7,10 +7,29 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" string= "Pateint Name"/>
-                <field name="age"  string= "Pateint Age"/>
+                <field name="age"  string= "Pateint Age" avg="Average age"/>
                 <field name="gender" string= "Pateint Gender"/>
                 <field name="ref"  />
             </tree>
+        </field>
+    </record>
+    <record id="view_om_hospital_pateint_activity" model="ir.ui.view">
+        <field name="name">om_hospital.pateint.activity</field>
+        <field name="model">om_hospital.pateint</field>
+        <field name="arch" type="xml">
+            <activity string="Patient">
+                <field name="name"/>
+                <field name="ref"/>
+                <templates>
+                    <div t-name="activity-box">
+                        <div>
+                            <field name="name" display="full"/>
+                            <field name="ref" display="full"/>
+                        </div>
+                    </div>
+                </templates>
+                    
+            </activity>
         </field>
     </record>
 
@@ -90,6 +109,14 @@
             <form>
                 
                 <sheet>
+                    <div class="alert alert-info text-center o_form_header" role="alert"
+                        attrs="{'invisible':[('is_birthday','=',False)]}" >
+                        <a class="close" data-dismiss="alert" href="#">X</a>
+                        <div><strong>Happy Birthday <field name="name" readonly="1"/>!</strong> </div>
+                        <div>May you have the happiest of the birthdays</div>
+                        
+                    </div>
+                    <field name="is_birthday" invisible="1"/>
                 <field name="image" widget="image" class="oe_avatar"/>
                     <group>
                         <group>
@@ -131,7 +158,7 @@
         <field name="name">Patient</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">om_hospital.pateint</field>
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_mode">tree,form,kanban,activity</field>
         <field name="context">{"search_default_group_by_gender":1,"search_default_filter_male":1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

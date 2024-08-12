@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
-from odoo import api, fields, models, _
-
+from odoo import models,fields
 
 class HospitalDoctor(models.Model):
     _name = "om_hospital.doctor"
@@ -16,14 +13,4 @@ class HospitalDoctor(models.Model):
         ('other', 'Other'),
     ], required=True, default='male')
     
-
-
-
-
-
-
-
-
-
-
-
+    department_ids = fields.Many2many('om_hospital.department', string='Departments')

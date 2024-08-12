@@ -1,14 +1,15 @@
-from odoo import models, fields,api
-
+from odoo import models, fields,api,_
+from odoo.exceptions import UserError
 class Appointment(models.Model):
     _name = 'om_hospital.appointment'
     _description = 'this is a model for appointment'
     _inherit = ["mail.thread","mail.activity.mixin"]
+    _order = "id desc"
     ref = fields.Char(string='Ref',help="Reference to patient's ref")
 
     prescription = fields.Html(string='Prescription')
 
-    _rec_name = "ref"
+    _rec_name = "sequence_number"
 
     priority = fields.Selection([
         ('0', 'Normal'),
@@ -27,11 +28,23 @@ class Appointment(models.Model):
     doctor_id = fields.Many2one('om_hospital.doctor', string="Doctor")
     note = fields.Text(string='Description')
     
-    pateint_id = fields.Many2one("om_hospital.pateint",string="Pateint")
+    pateint_id = fields.Many2one("om_hospital.pateint",string="Pateint",required=True)
     appointment_time= fields.Datetime(string="Appointment Time" ,default=fields.Datetime.now)
     booking_Date= fields.Date(string="Booking Time",default=fields.Date.context_today)
     gender = fields.Selection(related="pateint_id.gender")
 
+    sequence_number = fields.Char(string='Sequence', required=True, copy=False, readonly=True, default=lambda self: _('New'))
+
+    # @api.model
+    # def create(self, vals):
+    #     if vals.get('sequence_number', _('New')) == _('New') and self.state == "done":
+    #         vals['sequence_number'] = self.env['ir.sequence'].next_by_code('om_hospital.appointment') or _('New')
+    #     return super(Appointment, self).create(vals)
+    
+    def write(self, vals):
+        if  self.sequence_number == _('New') and (self.state == "done" or vals.get('state', "none") =="done") :
+            vals['sequence_number'] = self.env['ir.sequence'].next_by_code('om_hospital.appointment') or _('New')
+        return super(Appointment, self).write(vals)
 
     @api.onchange("pateint_id")
     def onchange_patient_id(self):
@@ -70,4 +83,18 @@ class Appointment(models.Model):
         for rec in self:
             rec.state = "done"
 
+    def action_delete_appointment(self):
+
+        self.ensure_one()  # Ensure the method is called on a single record
+        action = {
+            'type': 'ir.actions.act_window',
+            'name': 'Appointment Delete',
+            'res_model': 'om_hospital.appointment_delete_wizard',
+            'view_mode': 'form',
+            'target': 'new',
+        #     'context': {
+        #     'default_appointment_id': self.id,
+        # },
+        }
+        return action
     
